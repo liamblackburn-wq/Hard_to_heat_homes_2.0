@@ -1,9 +1,10 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session
 from src.os_api import os_api_call
-from src.utils import get_properties_from_os, setting_void_properties, get_attributes_from_epc
+from src.utils import get_properties_from_os, get_attributes_from_epc, set_missing_addresses, setting_void_properties
 from src.variables import OS_KEY
 from src.council_data_utils import get_bbox_for_council_code, filter_properties_by_council_code
+from src.generate_heat_map import generate_heat_map
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ def set_property_data(council_code, council_bbox):
         "filter": "buildinguse_oslandusetiera = 'Residential Accommodation' AND mainbuildingid_ismainbuilding = 'Yes'",
         "bbox": council_bbox,
          }
-
+    
     global properties
     
     list_of_buildings = os_api_call(HEADERS, PARAMS)["features"]
@@ -41,11 +42,13 @@ def set_property_data(council_code, council_bbox):
     for i in range(len(properties)):
         properties[i].calculate_score()
     
-    return 
+    return
 
 @app.route("/home")
 def home():
-    return render_template("home.html", properties=properties, key=OS_KEY)
+   global elbmridge_council_code
+   heat_map = generate_heat_map(elbmridge_council_code)
+   return render_template("home.html", properties=properties, key=OS_KEY, heat_map=heat_map)
 
 @app.route("/<int:uprn>")
 def property(uprn):

@@ -53,7 +53,7 @@ def get_bbox_for_council_code(council_code):
         return False
     
 def get_formatted_bbox_for_council_code(council_code):
-    match = next ((entry for entry in bbox_data if entry["census_code"] == council_code),None)
+    match = next ((entry for entry in councils_data if entry["census_code"] == council_code),None)
     if match:
         bbox_dict = match["bbox"]
         bbox_values = (bbox_dict['minx'], bbox_dict['miny'], bbox_dict['maxx'], bbox_dict['maxy'])

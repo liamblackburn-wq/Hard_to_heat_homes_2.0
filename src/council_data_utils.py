@@ -4,7 +4,7 @@ import json
 from shapely.geometry import shape
 # from src.epc_api import epc_api_call_address
 
-with open("data/councils_data_DEMO.json") as bbox_json:
+with open("data/councils_bbox_data_DEMO.json") as bbox_json:
         councils_data = json.load(bbox_json)
 df = pd.read_csv("data/uprn_to_council_data_SE_DEMO.csv", dtype={"UPRN": str, "COUNCIL_CODE": str})
 
@@ -91,3 +91,5 @@ def get_polygon_for_council_code(council_code):
             "coordinates": [latlon_coords]
         }
     return request_body
+
+_create_councils_data()

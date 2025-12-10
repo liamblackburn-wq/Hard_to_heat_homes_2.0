@@ -1,3 +1,9 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-*
-TEST_DATA.csv
+__pycache__
+bin
+*.csv
+include
+lib
+share
+.env
+pyvenv.cfg

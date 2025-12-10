@@ -5,6 +5,7 @@ from src.utils import get_properties_from_os, get_attributes_from_epc, set_missi
 from src.variables import OS_KEY
 from src.council_data_utils import get_bbox_for_council_code, filter_properties_by_council_code
 from src.generate_heat_map import generate_heat_map
+from src.lreg_data_utils import get_details_from_land_reg
 
 app = Flask(__name__)
 
@@ -38,7 +39,10 @@ def set_property_data(council_code, council_bbox):
     properties = get_properties_from_os(list_of_buildings)
     properties = filter_properties_by_council_code(council_code, properties)
     properties = get_attributes_from_epc(properties)
-    
+    # properties = add_in_land_reg_fields(owned_by = LA/PC/Not on list)
+    properties = get_details_from_land_reg(properties)
+    print(properties[0].__dict__)
+
     for i in range(len(properties)):
         properties[i].calculate_score()
     

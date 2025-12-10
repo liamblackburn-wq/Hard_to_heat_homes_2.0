@@ -47,3 +47,5 @@ class Property():
         age_is_int = type(self.age) is int
         if not age_is_int:
             self.age = int(self.age[-4:])
+    
+    

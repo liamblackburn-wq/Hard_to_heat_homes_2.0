@@ -39,9 +39,7 @@ def set_property_data(council_code, council_bbox):
     properties = get_properties_from_os(list_of_buildings)
     properties = filter_properties_by_council_code(council_code, properties)
     properties = get_attributes_from_epc(properties)
-    # properties = add_in_land_reg_fields(owned_by = LA/PC/Not on list)
     properties = get_details_from_land_reg(properties)
-    print(properties[0].__dict__)
 
     for i in range(len(properties)):
         properties[i].calculate_score()

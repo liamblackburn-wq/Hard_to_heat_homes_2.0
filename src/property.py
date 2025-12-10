@@ -25,6 +25,9 @@ class Property():
         self.energy_usage = 'No Usage Found'   
         self.height_relative_roof_base_m = 0
         self.green_roof_presence = ''
+        self.owner_name = ''
+        self.owner_type = ''
+        self.company_number = None
 
     def calculate_score(self):
         score = 0
@@ -48,4 +51,10 @@ class Property():
         if not age_is_int:
             self.age = int(self.age[-4:])
     
-    
+    def set_test_properties(self, owner_name, owner_type, company_number):
+        self.owner_name = owner_name
+        self.owner_type = owner_type
+        self.company_number = company_number
+
+    # def set_better_test_properties(self, property, value):
+    #    self.update({property: value})

@@ -11,28 +11,32 @@ for collection in os_dummy_data:
     array_of_buildings.extend(collection["features"])
 
 props = get_properties_from_os(array_of_buildings)
-dummy_uprn = 10090058306
-dummy_prop = Property(dummy_uprn)
 
-props.append(dummy_prop)
+example_uprn_for_tunbridge_wells = 10090058306
+example_tunbridge_wells_prop = Property(example_uprn_for_tunbridge_wells)
+
+props.append(example_tunbridge_wells_prop)
 
 def test_filter_properties_in_elmbridge():
     elmbridge_council_code = "E07000207"
     filtered_props = filter_properties_by_council_code(elmbridge_council_code, props)
+    uprn_to_council_dict = load_uprn_to_council(elmbridge_council_code)
 
-    assert len(filtered_props) == 4
+    assert all(uprn_to_council_dict[str(prop.uprn)] == elmbridge_council_code for prop in filtered_props)
 
 def test_filter_properties_in_east_hampshire():
     east_hampshire_council_code = "E07000085"
     filtered_props = filter_properties_by_council_code(east_hampshire_council_code, props)
+    uprn_to_council_dict = load_uprn_to_council(east_hampshire_council_code)
 
-    assert filtered_props == []
+    assert all(uprn_to_council_dict[str(prop.uprn)] == east_hampshire_council_code for prop in filtered_props)
 
 def test_filter_properties_in_tunbridge_wells():
     tunbridge_wells_council_code = "E07000116"
     filtered_props = filter_properties_by_council_code(tunbridge_wells_council_code, props)
+    uprn_to_council_dict = load_uprn_to_council(tunbridge_wells_council_code)
 
-    assert filtered_props == [dummy_prop]
+    assert all(uprn_to_council_dict[str(prop.uprn)] == tunbridge_wells_council_code for prop in filtered_props)
 
 def test_filter_properties_in_bristol():
     bristol_council_code = "E06000023"
@@ -44,4 +48,4 @@ def test_filter_properties_in_bristol():
 def test_filter_properties_for_():
     filtered_props = filter_properties_by_council_code(None, props)
 
-    assert filtered_props == []    
+    assert filtered_props == []

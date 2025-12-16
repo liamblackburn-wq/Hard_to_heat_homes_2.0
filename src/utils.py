@@ -33,7 +33,7 @@ def get_properties_from_os(list_of_buildings):
 
     return list_of_properties
 
-def set_missing_addresses(property):
+def set_address(property):
     response = os_places_api_call(property.uprn)
     if response and response.get('results'):
         property.address = response['results'][0]['DPA']['ADDRESS']

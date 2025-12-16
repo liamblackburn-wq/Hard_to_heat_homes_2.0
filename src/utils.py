@@ -35,8 +35,10 @@ def get_properties_from_os(list_of_buildings):
 
 def set_address(property):
     response = os_places_api_call(property.uprn)
+
     if response and response.get('results'):
         property.address = response['results'][0]['DPA']['ADDRESS']
+        # property.address = format_address(property.address)
     else:
         property.address = "Address unavailable"
 

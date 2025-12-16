@@ -7,7 +7,7 @@ with open("tests/test_data/os_dummy_data.json") as data:
 
 
 
-list_of_properties = get_properties_from_os(os_dummy_data['features'])
+list_of_properties = get_properties_from_os(os_dummy_data[0]['features'])
 setting_void_properties(list_of_properties)
 
 def test_property_has_void_status_false():

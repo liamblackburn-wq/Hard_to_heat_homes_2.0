@@ -12,11 +12,6 @@ for collection in os_dummy_data:
 
 props = get_properties_from_os(array_of_buildings)
 
-example_uprn_for_tunbridge_wells = 10090058306
-example_tunbridge_wells_prop = Property(example_uprn_for_tunbridge_wells)
-
-props.append(example_tunbridge_wells_prop)
-
 def test_filter_properties_in_elmbridge():
     elmbridge_council_code = "E07000207"
     filtered_props = filter_properties_by_council_code(elmbridge_council_code, props)

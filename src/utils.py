@@ -33,6 +33,40 @@ def get_properties_from_os(list_of_buildings):
 
     return list_of_properties
 
+def set_address(property):
+    response = os_places_api_call(property.uprn)
+
+    if response and response.get('results'):
+        property.address = response['results'][0]['DPA']['ADDRESS']
+    else:
+        property.address = "Address unavailable"
+
+def format_address(address):
+    if address == "Address unavailable":
+        return address
+    
+    address_parts = address.split(",")
+    postcode = str(address_parts[-1])
+    
+    formatted_address = ", ".join(address_parts[:-1]).title() + ", " + postcode
+
+    return formatted_address
+
+def setting_void_properties(list_of_properties):
+    for i in range(len(list_of_properties)):
+        if i %3 == 0:
+            list_of_properties[i].void = True
+
+def filter_for_void(list_of_properties):
+
+    void_properties = []
+
+    for i in range(len(list_of_properties)):
+        if list_of_properties[i].void == True:
+            void_properties.append(list_of_properties[i])
+
+    return void_properties
+
 def get_attributes_from_epc(properties):
     uprns = [p.uprn for p in properties]
     
@@ -59,7 +93,6 @@ def get_attributes_from_epc(properties):
 
     for p in properties:
         if str(p.uprn) in uprn_to_epc_data:
-            p.address = uprn_to_epc_data[str(p.uprn)]["address"]
             p.epc_rating = uprn_to_epc_data[str(p.uprn)]["rating"]
             p.epc_score = uprn_to_epc_data[str(p.uprn)]["score"]
             p.energy_usage = uprn_to_epc_data[str(p.uprn)]["consumption"]

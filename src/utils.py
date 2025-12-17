@@ -65,3 +65,10 @@ def get_attributes_from_epc(properties):
             p.energy_usage = uprn_to_epc_data[str(p.uprn)]["consumption"]
 
     return properties
+
+def remove_blank_addresses(properties):
+    filtered_addresses = []
+    for prop in properties:
+        if prop.address != "":
+            filtered_addresses.append(prop)
+    return filtered_addresses

@@ -6,6 +6,7 @@ from src.utils import get_properties_from_os, get_attributes_from_epc, set_missi
 from src.variables import OS_KEY
 from src.council_data_utils import get_bbox_for_council_code, filter_properties_by_council_code
 from src.generate_heat_map import generate_heat_map
+from src.building_collection import BuildingCollection
 
 app = Flask(__name__)
 
@@ -26,25 +27,10 @@ def login():
     return render_template("login.html")
 
 def set_property_data(council_code, council_bbox):
-    HEADERS = {"Accept": "application/json"}
-    PARAMS = {
-        "key": OS_KEY,
-        "filter": "buildinguse_oslandusetiera = 'Residential Accommodation' AND mainbuildingid_ismainbuilding = 'Yes'",
-        "bbox": council_bbox,
-        # "offset": 100,
-         }
+    
+    list_of_buildings = BuildingCollection(council_bbox, 3).produce_list()
     
     global properties
-    
-    # links = os_api_call(HEADERS, PARAMS)["links"]
-    # print(links[1]["href"])
-    
-    list_of_buildings = os_api_call(HEADERS, PARAMS, 0)["features"] + os_api_call(HEADERS, PARAMS, 100)["features"] + os_api_call(HEADERS, PARAMS, 200)["features"]
-    
-    print(len(list_of_buildings))
-    print(list_of_buildings[0]["id"])
-    sys.stdout.flush()
-    
     properties = get_properties_from_os(list_of_buildings)
     properties = filter_properties_by_council_code(council_code, properties)
     properties = get_attributes_from_epc(properties)

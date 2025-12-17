@@ -42,9 +42,6 @@ def set_address(property):
         property.address = "Address unavailable"
 
 def format_address(address):
-    if address == "Address unavailable":
-        return address
-    
     address_parts = address.split(",")
     postcode = str(address_parts[-1])
     

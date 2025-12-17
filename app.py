@@ -39,10 +39,10 @@ def set_property_data(council_code, council_bbox):
     properties = filter_properties_by_council_code(council_code, properties)
 
     for property in properties:
-        if property.address == '':
-            set_address(property)
-
+        set_address(property)
         property.address = format_address(property.address)
+        if str(property.address[0]) == ',':
+            property.address = 'Address unavailable'
     
     properties = get_attributes_from_epc(properties)
 

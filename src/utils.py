@@ -38,9 +38,17 @@ def set_address(property):
 
     if response and response.get('results'):
         property.address = response['results'][0]['DPA']['ADDRESS']
-        # property.address = format_address(property.address)
     else:
         property.address = "Address unavailable"
+
+def address_format(property):
+    formatted_address = property.split(",")
+    postcode = formatted_address[-1]
+    final_output = " ".join(formatted_address[:-1]).title() + postcode
+    return final_output
+
+
+print(address_format("hi, title, nothis"))
 
 def setting_void_properties(list_of_properties):
     for i in range(len(list_of_properties)):
@@ -83,7 +91,7 @@ def get_attributes_from_epc(properties):
 
     for p in properties:
         if str(p.uprn) in uprn_to_epc_data:
-            p.address = uprn_to_epc_data[str(p.uprn)]["address"]
+            # p.address = uprn_to_epc_data[str(p.uprn)]["address"]
             p.epc_rating = uprn_to_epc_data[str(p.uprn)]["rating"]
             p.epc_score = uprn_to_epc_data[str(p.uprn)]["score"]
             p.energy_usage = uprn_to_epc_data[str(p.uprn)]["consumption"]

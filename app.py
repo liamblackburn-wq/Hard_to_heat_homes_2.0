@@ -42,7 +42,6 @@ def set_property_data(council_code, council_bbox):
         if property.address == '':
             set_address(property)
 
-        # format addresses
         property.address = format_address(property.address)
     
     properties = get_attributes_from_epc(properties)

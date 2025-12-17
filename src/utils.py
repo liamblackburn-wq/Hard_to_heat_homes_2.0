@@ -41,14 +41,11 @@ def set_address(property):
     else:
         property.address = "Address unavailable"
 
-def address_format(property):
+def format_address(property):
     formatted_address = property.split(",")
     postcode = formatted_address[-1]
     final_output = " ".join(formatted_address[:-1]).title() + postcode
     return final_output
-
-
-print(address_format("hi, title, nothis"))
 
 def setting_void_properties(list_of_properties):
     for i in range(len(list_of_properties)):

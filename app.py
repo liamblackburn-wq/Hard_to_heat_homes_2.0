@@ -48,7 +48,7 @@ def set_property_data(council_code, council_bbox):
     elif current_council_code == 'E07000085':
         target_csv_path = 'data/TEST_EAST_HAMPSHIRE_CCOD_DEC_2025.csv'
     elif current_council_code == 'E06000023':
-        target_csv_path = 'data/TEST_BRISTOL_CCOD_MATCHES.csv'
+        target_csv_path = 'data/TEST_BRISTOL_CCOD_DEC_2025.csv'
     
     for prop in properties:
         match_property_to_ccod(target_csv_path, prop)

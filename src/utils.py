@@ -81,7 +81,7 @@ def normalise_address(addr: str) -> str:
     addr = addr.lower()
 
     # removing county names to make matching more consistent
-    counties = ["kent", "tunbridge wells", "bristol", "surrey", "hampshire"]
+    counties = ["kent", "tunbridge wells", "surrey", "east hampshire", "hampshire", 'bristol']
     
     for c in counties:
         # \b is word boundary e.g \bkent\b matches 'kent' but not 'kentish'
@@ -108,4 +108,5 @@ def match_property_to_ccod(csv_path: str, property: property):
     property.set_owner_name(str(match.iloc[0]["Proprietor Name (1)"]))
     property.set_owner_type(str(match.iloc[0]["Proprietorship Category (1)"]))
     property.set_company_registration_number(str(match.iloc[0]["Company Registration No. (1)"]))
+    
     return

@@ -51,11 +51,9 @@ def set_property_data(council_code, council_bbox):
     if current_council_code == 'E07000116':
         target_csv_path = 'data/TEST_TUNBRIDGE_CCOD_DEC_2025.csv'
     elif current_council_code == 'E07000207':
-        # target_csv_path = 'elmbridge'
-        pass
+        target_csv_path = 'data/TEST_ELMBRIDGE_CCOD_DEC_2025.csv'
     elif current_council_code == 'E07000085':
-        # target_csv_path = 'east hampshire'
-        pass
+        target_csv_path = 'data/TEST_HAMPSHIRE_CCOD_DEC_2025.csv'
     elif current_council_code == 'E06000023':
         target_csv_path = 'data/TEST_BRISTOL_CCOD_MATCHES.csv'
     
